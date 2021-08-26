@@ -27,7 +27,7 @@ public class App
       	        .newTrigger()
       	        .startNow()
       	        .withIdentity("triggerimport")
-      	        .withSchedule(CronScheduleBuilder.cronSchedule("0 06 19 * * ?"))            
+      	        .withSchedule(CronScheduleBuilder.cronSchedule("0 14 19 * * ?"))            
       	        .build();
       	    	
       	    	//schedule it
