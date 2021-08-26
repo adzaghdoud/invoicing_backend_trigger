@@ -1,11 +1,11 @@
 package com.invoicing.backend.trigger.dao;
 
-import java.sql.Timestamp;
+
 import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.CriteriaUpdate;
+
 import javax.persistence.criteria.Root;
 
 import org.hibernate.query.Query;

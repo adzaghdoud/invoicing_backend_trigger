@@ -17,15 +17,15 @@ public class ImportTransaction  implements Job{
 	final org.apache.logging.log4j.Logger log =  LogManager.getLogger(this.getClass().getName());
 	  public void execute(JobExecutionContext context)
 			    throws JobExecutionException {
-		 
-			     // 1-genreate json transactions file
+		    
+		  
 		    AbstractApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
 		    CompanyService srvcompany = (CompanyService) ctx.getBean("CompanyService");
 		    for (int i=0 ; i<=srvcompany.getlistcompany().size() ; i++) {
 		    	if (srvcompany.getlistcompany().get(i).getBankname().toUpperCase().contentEquals("QONTO")) {
-		    		
+		    		   log.info("*******************************Begin launching trigger for "+srvcompany.getlistcompany().get(i).getRs()+"****************");
 		    		  try {
-		 				 
+		 				 // regenerate json transactions
 		 				 ProcessBuilder processBuilder = new ProcessBuilder("/stor/invoicing/scripts/get_tansactions_qonto.sh",srvcompany.getlistcompany().get(i).getRib(),srvcompany.getlistcompany().get(i).getSlug(),srvcompany.getlistcompany().get(i).getToken(),"/stor/invoicing/in/transactions_"+srvcompany.getlistcompany().get(i).getRs()+".json");
 		 				 processBuilder.redirectErrorStream(true);
 		 				 Process p = processBuilder.start();
@@ -40,7 +40,8 @@ public class ImportTransaction  implements Job{
 		 			log.error(ExceptionUtils.getStackTrace(e));
 		 			}		   	    		
 		    			try {
-		    			 ProcessBuilder processBuilder = new ProcessBuilder("/stor/invoicing/scripts/run_jar_import_qonto.sh","/stor/invoicing-backend/invoicing-backend.jar","/stor/invoicing/in/transactions_"+srvcompany.getlistcompany().get(i).getRs()+".json",srvcompany.getlistcompany().get(i).getRs());	    	
+		    		    // call invoicing-backend.jar
+		    			 ProcessBuilder processBuilder = new ProcessBuilder("java -jar","/stor/invoicing-backend/invoicing-backend.jar","/stor/invoicing/in/transactions_"+srvcompany.getlistcompany().get(i).getRs()+".json",srvcompany.getlistcompany().get(i).getRs());	    	
 		    			 processBuilder.redirectErrorStream(true);
 		    			 Process p = processBuilder.start();
 		    			 log.info(new String(IOUtils.toByteArray(p.getInputStream()))); 
@@ -53,11 +54,11 @@ public class ImportTransaction  implements Job{
 		    		log.error(ExceptionUtils.getStackTrace(e));
 		    		}
 		    	
-		    	
+		    			log.info("*******************************End launching trigger for "+srvcompany.getlistcompany().get(i).getRs()+"****************");
 		    	}
 		    	
 		    }
-		  
+		      
 		    ctx.close();
 			        
 			    }
