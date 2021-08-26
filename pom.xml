@@ -144,14 +144,14 @@
   
   
   
-    <finalName>Invoicing</finalName>
+   
        <plugins>
       <plugin>
   <artifactId>maven-assembly-plugin</artifactId>
   <configuration>
     <archive>
       <manifest>
-        <mainClass>com.invoicing.main.App</mainClass>
+        <mainClass>com.invoicing.backend.trigger.main.App</mainClass>
       </manifest>
     </archive>
     <descriptorRefs>
