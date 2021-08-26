@@ -16,12 +16,7 @@
         <project.reporting.outputEncoding>ISO-8859-1</project.reporting.outputEncoding>
 	</properties>
 
-<repositories>
-		<repository>
-			<id>jaspersoft-third-party</id>
-			<url>https://jaspersoft.jfrog.io/jaspersoft/third-party-ce-artifacts/</url>
-		</repository>
-		</repositories>
+
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -80,24 +75,9 @@
             <version>${hibernate.version}</version>
         </dependency>
         
-        <dependency>
-        <groupId>javax.servlet.jsp</groupId>
-        <artifactId>javax.servlet.jsp-api</artifactId>
-        <version>2.3.3</version>
-        <scope>provided</scope>
-    </dependency>
-  <dependency>
-        <groupId>jstl</groupId>
-        <artifactId>jstl</artifactId>
-        <version>1.2</version>
-    </dependency>
-   
-  <dependency>
-  	<groupId>net.sf.jasperreports</groupId>
-  	<artifactId>jasperreports</artifactId>
-  	<version>6.16.0</version>
-  </dependency>
+     
 
+ 
   
   <dependency>
     <groupId>mysql</groupId>
@@ -114,11 +94,6 @@
   	<artifactId>log4j-core</artifactId>
   	<version>2.13.3</version>
   </dependency> 
-    <dependency>
-    <groupId>commons-fileupload</groupId>
-    <artifactId>commons-fileupload</artifactId>
-    <version>1.4</version>
-    </dependency>  
     <!-- Java mail -->
     <dependency>
     <groupId>javax.mail</groupId>
@@ -142,7 +117,17 @@
 	<version>2.3.0</version>
 </dependency>
 
-
+<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+<dependency>
+    <groupId>org.apache.commons</groupId>
+    <artifactId>commons-lang3</artifactId>
+    <version>3.0</version>
+</dependency>
+   <dependency>
+    <groupId>commons-io</groupId>
+    <artifactId>commons-io</artifactId>
+    <version>2.6</version>
+</dependency>
   </dependencies>
   
   <build>
@@ -162,19 +147,27 @@
     <finalName>Invoicing</finalName>
        <plugins>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-war-plugin</artifactId>
-        <version>3.2.0</version>
-        <configuration>
-          <archive>
-           <manifest>
-            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-          </manifest>
-          </archive>
-
-        </configuration>
-      </plugin>
-      
+  <artifactId>maven-assembly-plugin</artifactId>
+  <configuration>
+    <archive>
+      <manifest>
+        <mainClass>com.invoicing.main.App</mainClass>
+      </manifest>
+    </archive>
+    <descriptorRefs>
+      <descriptorRef>jar-with-dependencies</descriptorRef>
+    </descriptorRefs>
+  </configuration>
+  <executions>
+    <execution>
+      <id>make-assembly</id> <!-- this is used for inheritance merges -->
+      <phase>package</phase> <!-- bind to the packaging phase -->
+      <goals>
+        <goal>single</goal>
+      </goals>
+    </execution>
+  </executions>
+</plugin>
   </plugins>
   </build>
   

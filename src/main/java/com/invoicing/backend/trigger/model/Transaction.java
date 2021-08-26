@@ -2,13 +2,13 @@ package com.invoicing.backend.trigger.model;
 
 import java.sql.Timestamp;
 
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.NamedNativeQuery;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name="transactions")
