@@ -3,6 +3,7 @@ package com.invoicing.backend.trigger.main;
 
 
 import org.apache.commons.io.IOUtils;
+
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.logging.log4j.LogManager;
 import org.quartz.Job;
@@ -17,10 +18,11 @@ public class ImportTransaction  implements Job{
 	final org.apache.logging.log4j.Logger log =  LogManager.getLogger(this.getClass().getName());
 	  public void execute(JobExecutionContext context)
 			    throws JobExecutionException {
-		    
-		  
+		   
+		     
 		    AbstractApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
 		    CompanyService srvcompany = (CompanyService) ctx.getBean("CompanyService");
+	
 		    for (int i=0 ; i<=srvcompany.getlistcompany().size() ; i++) {
 		    	if (srvcompany.getlistcompany().get(i).getBankname().toUpperCase().contentEquals("QONTO")) {
 		    		   log.info("*******************************Begin launching trigger for "+srvcompany.getlistcompany().get(i).getRs()+"****************");

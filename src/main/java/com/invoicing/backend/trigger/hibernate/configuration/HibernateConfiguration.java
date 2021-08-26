@@ -20,7 +20,7 @@ package com.invoicing.backend.trigger.hibernate.configuration;
 	 
 	@Configuration
 	@EnableTransactionManagement
-	@ComponentScan({ "com.invoicing.hibernate.configuration" })
+	@ComponentScan({ "com.invoicing.backend.trigger.hibernate.configuration" })
 	@PropertySource(value = { "classpath:application.properties" })
 	public class HibernateConfiguration {
 	 
@@ -31,7 +31,7 @@ package com.invoicing.backend.trigger.hibernate.configuration;
 	    public LocalSessionFactoryBean sessionFactory() {
 	        LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
 	        sessionFactory.setDataSource(dataSource());
-	        sessionFactory.setPackagesToScan(new String[] { "com.invoicing.model" });
+	        sessionFactory.setPackagesToScan(new String[] { "com.invoicing.backend.trigger.model" });
 	        sessionFactory.setHibernateProperties(hibernateProperties());
 	        return sessionFactory;
 	     }

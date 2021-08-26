@@ -8,12 +8,18 @@ import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
 import org.quartz.CronScheduleBuilder;
 import org.quartz.impl.StdSchedulerFactory;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.AbstractApplicationContext;
+
+import com.invoicing.backend.trigger.hibernate.configuration.AppConfig;
+import com.invoicing.backend.trigger.service.CompanyService;
 
 public class App 
 {
     public static void main( String[] args ) throws SchedulerException
     {
-      	JobDetail job = JobBuilder.newJob(ImportTransaction.class)
+      	
+            	JobDetail job = JobBuilder.newJob(ImportTransaction.class)
       	        .withIdentity("triggerimport").build();
 
       	    	
@@ -21,7 +27,7 @@ public class App
       	        .newTrigger()
       	        .startNow()
       	        .withIdentity("triggerimport")
-      	        .withSchedule(CronScheduleBuilder.cronSchedule("0 33 18 * * ?"))            
+      	        .withSchedule(CronScheduleBuilder.cronSchedule("0 06 19 * * ?"))            
       	        .build();
       	    	
       	    	//schedule it

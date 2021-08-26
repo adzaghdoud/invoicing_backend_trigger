@@ -9,7 +9,7 @@
             <PatternLayout pattern="[%t] %-5p | %-60c | %m (%F:%L)%n" />
         </Console>
         
-       <RollingFile name="LOG_FILE" fileName="${LogPath}/invoicing_backend.log"
+       <RollingFile name="LOG_FILE" fileName="${LogPath}/invoicing_backend_trigger.log"
 			filePattern="invoicing_backend-%d{yyyy-MM-dd}-%i.log">
 			<PatternLayout pattern="%d %-5p [%t] - %m (%F:%L)%n" />
 			<Policies>
