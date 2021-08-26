@@ -43,7 +43,7 @@ public class ImportTransaction  implements Job{
 		 			}		   	    		
 		    			try {
 		    		    // call invoicing-backend.jar
-		    			 ProcessBuilder processBuilder = new ProcessBuilder("java -jar","/stor/invoicing-backend/invoicing-backend.jar","/stor/invoicing/in/transactions_"+srvcompany.getlistcompany().get(i).getRs()+".json",srvcompany.getlistcompany().get(i).getRs());	    	
+		    			 ProcessBuilder processBuilder = new ProcessBuilder("/stor/invoicing/scripts/run_jar_import.sh","/stor/invoicing-backend/invoicing-backend.jar","/stor/invoicing/in/transactions_"+srvcompany.getlistcompany().get(i).getRs()+".json",srvcompany.getlistcompany().get(i).getRs());	    	
 		    			 processBuilder.redirectErrorStream(true);
 		    			 Process p = processBuilder.start();
 		    			 log.info(new String(IOUtils.toByteArray(p.getInputStream()))); 
