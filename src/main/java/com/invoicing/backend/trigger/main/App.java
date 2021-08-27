@@ -18,7 +18,7 @@ public class App
 {
     public static void main( String[] args ) throws SchedulerException
     {
-      	
+      	         
             	JobDetail job = JobBuilder.newJob(ImportTransaction.class)
       	        .withIdentity("triggerimport").build();
 
@@ -27,7 +27,7 @@ public class App
       	        .newTrigger()
       	        .startNow()
       	        .withIdentity("triggerimport")
-      	        .withSchedule(CronScheduleBuilder.cronSchedule("0 05 21 * * ?"))            
+      	        .withSchedule(CronScheduleBuilder.cronSchedule("0 30 11 * * ?"))            
       	        .build();
       	    	
       	    	//schedule it
