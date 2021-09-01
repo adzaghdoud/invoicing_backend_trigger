@@ -111,6 +111,7 @@ public class Transaction {
 		this.company = company;
 	}
 
+
 	
    
 }
