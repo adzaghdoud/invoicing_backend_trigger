@@ -1,6 +1,7 @@
 package com.invoicing.backend.trigger.model;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,6 +29,8 @@ public class Company {
 	private byte[] logo;
 	private Timestamp last_refresh_transaction;
 	private String numtva;
+	private String email;
+	private String date_cloture_comptable;
 	public String getBankname() {
 		return bankname;
 	}
@@ -117,6 +120,18 @@ public class Company {
 	}
 	public void setNumtva(String numtva) {
 		this.numtva = numtva;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getDate_cloture_comptable() {
+		return date_cloture_comptable;
+	}
+	public void setDate_cloture_comptable(String date_cloture_comptable) {
+		this.date_cloture_comptable = date_cloture_comptable;
 	}
 	
     
