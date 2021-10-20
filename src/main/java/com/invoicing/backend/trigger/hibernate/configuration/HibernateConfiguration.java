@@ -5,8 +5,9 @@ package com.invoicing.backend.trigger.hibernate.configuration;
 
 	 
 	import javax.sql.DataSource;
-	 
-	import org.hibernate.SessionFactory;
+
+import org.apache.logging.log4j.LogManager;
+import org.hibernate.SessionFactory;
 	import org.springframework.beans.factory.annotation.Autowired;
 	import org.springframework.context.annotation.Bean;
 	import org.springframework.context.annotation.ComponentScan;
@@ -23,7 +24,7 @@ package com.invoicing.backend.trigger.hibernate.configuration;
 	@ComponentScan({ "com.invoicing.backend.trigger.hibernate.configuration" })
 	@PropertySource(value = { "classpath:application.properties" })
 	public class HibernateConfiguration {
-	 
+		final org.apache.logging.log4j.Logger log =  LogManager.getLogger(this.getClass().getName());
 	    @Autowired
 	    private Environment environment;
 	 
@@ -42,10 +43,14 @@ package com.invoicing.backend.trigger.hibernate.configuration;
 	        dataSource.setDriverClassName(environment.getRequiredProperty("jdbc.driverClassName"));
 	        dataSource.setUrl(environment.getRequiredProperty("jdbc.url"));
 	        dataSource.setUsername(environment.getRequiredProperty("jdbc.username"));
+	        if (System.getProperty("env") != null ) {
 	        if (System.getProperty("env").contentEquals("prod")) {
 	        dataSource.setPassword(environment.getRequiredProperty("prod.jdbc.password"));
 	        }else{
 	        dataSource.setPassword(environment.getRequiredProperty("jdbc.password"));	
+	        }
+	        }else {
+	        log.error("System Proprety env is not found ");
 	        }
 	        return dataSource;
 	    }
