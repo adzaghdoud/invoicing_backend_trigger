@@ -20,7 +20,7 @@ public class App
 	
     public static void main( String[] args ) throws SchedulerException
     {           final org.apache.logging.log4j.Logger log =  LogManager.getLogger(App.class);
-      	        if (System.getProperty("cronseconde").isEmpty()  || System.getProperty("cronminutes").isEmpty() || System.getProperty("cronheure").isEmpty() ) {
+               if (System.getProperty("cronseconde")==null  || System.getProperty("cronminutes")==null || System.getProperty("cronheure")==null ) {
       	        log.error("Nombre argument insuffisants ,il faut reseigner les secondes,minutes et heures");
       	        }else {
             	JobDetail job = JobBuilder.newJob(ImportTransaction.class)
