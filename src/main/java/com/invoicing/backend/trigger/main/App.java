@@ -6,6 +6,7 @@ import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
+import org.apache.logging.log4j.LogManager;
 import org.quartz.CronScheduleBuilder;
 import org.quartz.impl.StdSchedulerFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -15,14 +16,15 @@ import com.invoicing.backend.trigger.hibernate.configuration.AppConfig;
 import com.invoicing.backend.trigger.service.CompanyService;
 
 public class App 
-{
+{    
+	
     public static void main( String[] args ) throws SchedulerException
-    {
-      	         
+    {           final org.apache.logging.log4j.Logger log =  LogManager.getLogger(App.class);
+      	        if (System.getProperty("cronseconde").isEmpty()  || System.getProperty("cronminutes").isEmpty() || System.getProperty("cronheure").isEmpty() ) {
+      	        log.error("Nombre argument insuffisants ,il faut reseigner les secondes,minutes et heures");
+      	        }else {
             	JobDetail job = JobBuilder.newJob(ImportTransaction.class)
-      	        .withIdentity("triggerimport").build();
-
-      	    	
+      	        .withIdentity("triggerimport").build();      	    	
       	    	Trigger trigger = TriggerBuilder
       	        .newTrigger()
       	        .startNow()
@@ -34,7 +36,7 @@ public class App
       	    	Scheduler scheduler = new StdSchedulerFactory().getScheduler();
       	    	scheduler.start();
       	    	scheduler.scheduleJob(job, trigger);
-    
+      	        }
     
     
     }
